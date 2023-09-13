@@ -5,19 +5,14 @@ public class Fibonacci {
 
     public static void main(String[] args) {
         System.out.println("The 45 sequence fibonacci:");
-        for(int i=1;i<45;i++){
-            System.out.println(Fibonacci(i) + " ");
-        }
+        Fibonacci(1,1,0);
     }
-    
-    private static int Fibonacci(int n){
-        if(n<0){
-            return -1;
-        }else if(n<=1){
-            return n;
-        }else{
-            return Fibonacci(n-1) + Fibonacci(n-2);
+
+    private static int Fibonacci(int step, int lower, int higher){
+        if (step > 45){
+            return higher;
         }
+        System.out.println(higher +"("+step+")");
+        return Fibonacci(step +1,higher, higher+lower);
     }
-    
 }
