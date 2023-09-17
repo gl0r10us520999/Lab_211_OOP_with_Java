@@ -1,4 +1,4 @@
-package managerworker;
+package managestudent;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,12 +17,12 @@ public class Validate {
                 int number = Integer.parseInt(input);
                 //check the range of input
                 if (number < min || number > max){
-                    System.out.print("Please input between " + min + " and " + max + ":");
+                    System.out.println("Please input between " + min + " and " + max + ":");
                     continue;
                 }
                 return number;
             }catch (Exception e){
-                System.out.print("Please input an integer number:");
+                System.out.println("Please input an integer number:");
             }
         }
     }
@@ -37,12 +37,12 @@ public class Validate {
                 double number = Double.parseDouble(input);
                 //check the range of input
                 if (number < min || number > max){
-                    System.out.print("Please input between " + min +" and " + max + ":");
+                    System.out.println("Please input between " + min +" and " + max + ":");
                     continue;
                 }
                 return number;
             }catch (Exception e){
-                System.out.print("Please input an double number:");
+                System.out.println("Please input an double number:");
             }
         }
     }
@@ -54,24 +54,50 @@ public class Validate {
         while (true){
             String input = sc.nextLine();
             if (input.isEmpty()){
-                System.out.print("Please input an non-empty string");
+                System.out.println("Please input an non-empty string");
                 continue;
             }return input;
         }
     }
 
-    public String inputYesNo(String msg){
+    //Get valid date
+    public String inputDate(String msg){
         System.out.print(msg);
-        //Make sure that input is a non-empty string
+        //Set date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setLenient(false);
+        //Make sure user input a valid date
         while (true){
             String input = sc.nextLine();
-            if (input.isEmpty()){
-                System.out.print("Please input an non-empty string");
+            try {
+                Date date = dateFormat.parse(input);
+                //Get current date
+                Date currentDate = Calendar.getInstance().getTime();
+                //check valid date
+                if (currentDate.compareTo(date) < 0 ){
+                    System.out.println("Please input date that before current date");
+                    continue;
+                }return dateFormat.format(date);
+            }catch (Exception e){
+                System.out.println("Please input valid date (dd/MM/yyyy)");
+            }
+        }
+    }
+
+    public boolean checkYesNo(String msg){
+        System.out.printf("msg");
+        while (true){
+            String result = sc.nextLine();
+            if (!result.equalsIgnoreCase("Y") & !result.equalsIgnoreCase("N") ){
+                System.out.print("Please enter Y/y or N/n");
                 continue;
-            }if (!input.equalsIgnoreCase("Y") & !input.equalsIgnoreCase("N")) {
-                System.out.print("Please enter Y/y or N/n:");
-                continue;
-            }return input;
+            }
+            if(result.equalsIgnoreCase("Y")){
+                return true;
+            }
+            if (result.equalsIgnoreCase("N")) {
+                return false;
+            }
         }
     }
 }

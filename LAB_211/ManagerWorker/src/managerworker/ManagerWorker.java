@@ -29,7 +29,7 @@ public class ManagerWorker {
                     manager.changeSalary("DOWN");
                     break;
                 case 4:
-                    manager.getInformationSalary();1
+                    manager.getInformationSalary(); 
                     break;
                 case 5:
                     return;

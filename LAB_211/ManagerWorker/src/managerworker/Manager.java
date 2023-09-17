@@ -13,9 +13,6 @@ public class Manager {
     ArrayList<Worker> workers = new ArrayList<>();
     ArrayList<History> history = new ArrayList<>();
     ArrayList<History> salaryHistory = new ArrayList<>();
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH-mm-ss");
-    Calendar calendar = Calendar.getInstance();
-    String date = dateFormat.format(calendar.getTime());
     Validate validate = new Validate();
 
     public Worker getWorkerByCode(String id){
@@ -26,61 +23,77 @@ public class Manager {
         }return null;
     }
 
-    public void addWorker(){
-        String id;
-        while (true){
-            id = validate.inputString("Enter ID:");
-            Worker worker = getWorkerByCode(id);
-            if (worker == null){
-                break;
-            }else{
-                System.out.println("Id had already exist!");
-            }
-        }
-        String name = validate.inputString("Enter name:");
-        int age = validate.inputInt("Enter age:", 18, 50);
-        double salary = validate.inputDouble("Enter salary:",1,Double.MAX_VALUE);
-        String workLocation = validate.inputString("Enter work location:");
-        workers.add(new Worker(id, name, age, salary, workLocation ));
-        history.add(new History(id, name, age, salary, workLocation, "UP", date));
-    }
-
-    public void changeSalary(String status){
-        String id;
-        while (true){
-            id = validate.inputString("Enter ID:");
-            Worker worker = getWorkerByCode(id);
-            if (worker == null){
-                System.out.println("ID doesn't exist in database!");
-                continue;
-            }else {
-                if (worker.getSalary() == 1 && status.equals("DOWN")) {
-                    System.out.println("Can't decrease this worker's salary anymore!");
-                } else if (worker.getSalary() == Double.MAX_VALUE && status.equals("UP")) {
-                    System.out.println("Can't increase this worker's salary anymore!");
+    public void addWorker() {
+        while (true) {
+            String id;
+            while (true) {
+                id = validate.inputString("Enter ID:");
+                Worker worker = getWorkerByCode(id);
+                if (worker == null) {
+                    break;
                 } else {
-                    double salary;
-                    double currentSalary = worker.getSalary();
-                    while (true) {
-                        double changeSalary = validate.inputDouble("Enter salary change:", 1, Double.MAX_VALUE);
-                        if (status.equals("UP")) {
-                            salary = currentSalary + changeSalary;
-                            break;
-                        } else if (currentSalary < changeSalary) {
-                            System.out.println("The reduced salary must be less than the current salary (" + currentSalary + ")");
-                        } else {
-                            salary = currentSalary - changeSalary;
-                            break;
-                        }
-                    }
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH-mm-ss");
-                    Calendar calendar = Calendar.getInstance();
-                    String date = dateFormat.format(calendar.getTime());
-                    salaryHistory.add(new History(worker.getId(), worker.getName(), worker.getAge(), salary, worker.getWorkLocation(), status, date));
-                    worker.setSalary(salary);
+                    System.out.println("Id had already exist!");
                 }
             }
-            break;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH-mm-ss");
+            Calendar calendar = Calendar.getInstance();
+            String date = dateFormat.format(calendar.getTime());
+            String name = validate.inputString("Enter name:");
+            int age = validate.inputInt("Enter age:", 18, 50);
+            double salary = validate.inputDouble("Enter salary:", 1, Double.MAX_VALUE);
+            String workLocation = validate.inputString("Enter work location:");
+            workers.add(new Worker(id, name, age, salary, workLocation));
+            history.add(new History(id, name, age, salary, workLocation, "UP", date));
+
+            String addMore = validate.inputYesNo("Do you want to continue?(Y/N):");
+            if (!addMore.equalsIgnoreCase("Y")) {
+                break;
+            }
+        }
+    }
+
+    public void changeSalary(String status) {
+        while (true) {
+            String id;
+            while (true) {
+                id = validate.inputString("Enter ID:");
+                Worker worker = getWorkerByCode(id);
+                if (worker == null) {
+                    System.out.println("ID doesn't exist in database!");
+                    continue;
+                } else {
+                    if (worker.getSalary() == 1 && status.equals("DOWN")) {
+                        System.out.println("Can't decrease this worker's salary anymore!");
+                    } else if (worker.getSalary() == Double.MAX_VALUE && status.equals("UP")) {
+                        System.out.println("Can't increase this worker's salary anymore!");
+                    } else {
+                        double salary;
+                        double currentSalary = worker.getSalary();
+                        while (true) {
+                            double changeSalary = validate.inputDouble("Enter salary change:", 1, Double.MAX_VALUE);
+                            if (status.equals("UP")) {
+                                salary = currentSalary + changeSalary;
+                                break;
+                            } else if (currentSalary < changeSalary) {
+                                System.out.println("The reduced salary must be less than the current salary (" + currentSalary + ")");
+                            } else {
+                                salary = currentSalary - changeSalary;
+                                break;
+                            }
+                        }
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH-mm-ss");
+                        Calendar calendar = Calendar.getInstance();
+                        String date = dateFormat.format(calendar.getTime());
+                        salaryHistory.add(new History(worker.getId(), worker.getName(), worker.getAge(), salary, worker.getWorkLocation(), status, date));
+                        worker.setSalary(salary);
+                    }
+                }
+                break;
+            }
+            String addMore = validate.inputYesNo("Do you want to continue?(Y/N):");
+            if (!addMore.equalsIgnoreCase("Y")) {
+                break;
+            }
         }
     }
 
