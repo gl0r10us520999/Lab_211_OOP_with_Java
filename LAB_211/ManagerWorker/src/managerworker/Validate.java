@@ -59,7 +59,7 @@ public class Validate {
             }return input;
         }
     }
-
+    //Method do gvien yêu câu thêm, tuỳ tình huống có thể sử dụng
     public String inputYesNo(String msg){
         System.out.print(msg);
         //Make sure that input is a non-empty string
