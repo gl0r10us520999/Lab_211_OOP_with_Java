@@ -44,7 +44,7 @@ public class Manager {
             String workLocation = validate.inputString("Enter work location:");
             workers.add(new Worker(id, name, age, salary, workLocation));
             history.add(new History(id, name, age, salary, workLocation, "UP", date));
-
+            //Chức năng gvien yêu cầu thêm, tuỳ tình huống có thể sử dụng
             String addMore = validate.inputYesNo("Do you want to continue?(Y/N):");
             if (!addMore.equalsIgnoreCase("Y")) {
                 break;
@@ -90,6 +90,7 @@ public class Manager {
                 }
                 break;
             }
+            //Chức năng gvien yêu cầu thêm, tuỳ tình huống có thể sử dụng
             String addMore = validate.inputYesNo("Do you want to continue?(Y/N):");
             if (!addMore.equalsIgnoreCase("Y")) {
                 break;
@@ -101,7 +102,9 @@ public class Manager {
         if (history.isEmpty()){
             System.out.println("No history!");
         }
+        //Chức năng gvien yêu cầu thêm, tuỳ tình huống có thể sử dụng
         Collections.sort(salaryHistory, Comparator.comparing(History::getId));
+        
         System.out.printf("%-10s%-20s%-5s%-20s%-10s%-20s\n", "Code", "Name", "Age", "Salary", "Status", "Date");
         for (History salaryHistory : salaryHistory ){
             System.out.printf("%-10s%-20s%-5d%-20.0f%-10s%-20s\n", salaryHistory.getId(), salaryHistory.getName(), salaryHistory.getAge(), salaryHistory.getSalary(), salaryHistory.getStatus(), salaryHistory.getDate());
