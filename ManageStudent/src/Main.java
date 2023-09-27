@@ -8,7 +8,8 @@ public class Main {
       System.out.println(" 2.Find and Sort");
       System.out.println(" 3.Update/Delete");
       System.out.println(" 4.Report");
-      System.out.println(" 5.Exit");
+      System.out.println(" 5.Load students' data: ");
+      System.out.println(" 6.Exit");
       int choice = validation.inputInt("Enter choice:", 1, 5);
       switch (choice) {
         case 1:
@@ -24,6 +25,9 @@ public class Main {
           manager.report();
           break;
         case 5:
+          manager.loadStudentData();
+          break;
+        case 6:
           return;
       }
 

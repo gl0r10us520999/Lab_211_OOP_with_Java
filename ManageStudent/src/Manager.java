@@ -35,6 +35,9 @@ public class Manager {
 
   public void report() {
     HashMap<String, Integer> reports = new HashMap<>();
+    if(students.isEmpty()){
+      System.out.println("Students list is empty!");
+    }
     for (Student student : students) {
       String key = student.getId() + "#" + student.getStudentName() + "|" + student.getCourseName();
       if (reports.containsKey(key)) {
@@ -101,7 +104,7 @@ public class Manager {
 
   public void findAndSort() {
     String name = validation.inputString("Enter Name:");
-    Collections.sort(students, Comparator.comparing(Student::getId));
+    Collections.sort(students, Comparator.comparing(Student::getId).thenComparing(Student::getCourseName));
     if (students.isEmpty()) {
       System.out.println("No students");
     }
@@ -150,5 +153,9 @@ public class Manager {
         students.remove(student);
       }
     }
+  }
+  public void loadStudentData(){
+    ArrayList<Student> studentData = StudentData.getStudentData();
+    students.addAll(studentData);
   }
 }
