@@ -3,11 +3,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+import java.text.ParseException;
 
-/**
- *
- * @author LeSyThanhLong
- */
 public class Validate {
 
 
@@ -39,7 +36,7 @@ public class Validate {
     while(true) {
       String input = sc.nextLine();
       if(!input.matches(regex)){
-        System.out.print("Please input matches regex:"+regex);
+        System.out.print("Please input matches regex:"+regex + ":");
         continue;
       }
       if (input.isEmpty()) {
@@ -117,5 +114,15 @@ public class Validate {
       }
     }
     return true;
+  }
+
+  public Date parseDate(String dateSring){
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    try {
+      return dateFormat.parse(dateSring);
+    }catch (ParseException e){
+      e.printStackTrace();
+      return null;
+    }
   }
 }

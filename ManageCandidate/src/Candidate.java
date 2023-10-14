@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 public class Candidate {
 
   private String id;
@@ -9,6 +9,7 @@ public class Candidate {
   private String phone;
   private String email;
   private int typeCandidate;
+  private ArrayList<Certificate> certificates = new ArrayList<>();
 
   public Candidate() {
   }
@@ -94,6 +95,14 @@ public class Candidate {
     return this.firstName + this.lastName + "|" + this.birthDate + "|"
         + this.address + "|" + this.phone + "|" + this.email + "|"
         + this.typeCandidate;
+  }
+
+  public void addCertificate(Certificate certificate) {
+    certificates.add(certificate);
+  }
+
+  public ArrayList<Certificate> getCertificates() {
+    return certificates;
   }
 
 }

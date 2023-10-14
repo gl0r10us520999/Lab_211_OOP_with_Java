@@ -4,9 +4,6 @@ public class Internship extends Candidate {
   private String semester;
   private String university;
 
-  public Internship() {
-    super();
-  }
 
   public Internship(String major, String semester, String university,
       String id, String firstName, String lastName, String birthDate,

@@ -3,9 +3,6 @@ public class Experience extends Candidate {
   private int yearExperience;
   private String professionalSkill;
 
-  public Experience() {
-    super();
-  }
 
   public Experience(int yearExperience, String professionalSkill,
       String id, String firstName, String lastName, String birthDate,

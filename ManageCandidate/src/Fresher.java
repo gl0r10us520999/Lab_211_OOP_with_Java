@@ -3,10 +3,6 @@ public class Fresher extends Candidate {
   private String graduationDate;
   private String graduationRank;
 
-  public Fresher() {
-    super();
-  }
-
   public Fresher(String graduationDate, String graduationRank, String id,
       String firstName, String lastName, String birthDate, String address,
       String phone, String email, int typeCandidate) {
